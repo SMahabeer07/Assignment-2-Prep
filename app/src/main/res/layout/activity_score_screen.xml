@@ -40,6 +40,24 @@
         android:text="RETRY"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
+    <TextView
+        android:id="@+id/tvAnswers"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Reveal answers"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/material_on_background_emphasis_medium"
+        android:text="@string/close"
+        />
+
 
 
 </LinearLayout>

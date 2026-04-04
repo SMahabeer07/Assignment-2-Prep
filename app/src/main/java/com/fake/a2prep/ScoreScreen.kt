@@ -1,6 +1,8 @@
 package com.fake.a2prep
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -22,11 +24,39 @@ class ScoreScreen : AppCompatActivity() {
         val tvScoreDisplay = findViewById<TextView>(R.id.tvScoreDisplay)
         val btnReview = findViewById<Button>(R.id.btnReview)
         val btnRestart = findViewById<Button>(R.id.btnRestart)
-        val score = intent.getIntExtra("SCORE", 0).toString()
+        val btnClose = findViewById<Button>(R.id.btnClose)
+        val tvAnswers = findViewById<TextView>(R.id.tvAnswers)
+
+        val score = intent.getIntExtra("SCORE", 0)/2
+        val answers = intent.getBooleanArrayExtra("ANSWERS")
+        val questions = intent.getStringArrayExtra("Questions")
 
         tvScoreDisplay.text = "${score}/4"
-        btnReview.setOnClickListener {
-            // Handle review button click
+
+        btnRestart.setOnClickListener {
+            val intent = Intent(this, QuizScreen::class.java)
+            startActivity(intent)
+            finish()
         }
+
+        btnReview.setOnClickListener {
+            Log.d("ANSWERS", answers.toString())
+            Log.d("QUESTIONS", questions.toString())
+            tvAnswers.text = ""
+            if (answers != null) {
+                for(x in 0..3){
+                    tvAnswers.text = buildString {
+                        append(tvAnswers.text.toString())
+                        append((questions?.get(x) + ": " + answers[x]))
+                        append("\n")
+                    }
+                }
+            }
+        }
+
+        btnClose.setOnClickListener {
+            finishAffinity()
+        }
+
     }
 }

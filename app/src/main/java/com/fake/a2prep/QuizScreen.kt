@@ -53,6 +53,8 @@ class QuizScreen : AppCompatActivity() {
             }
 
             btnNext.visibility = Button.VISIBLE
+            btnError.isEnabled = false
+            btnValid.isEnabled = false
         }
 
         btnError.setOnClickListener {
@@ -69,6 +71,8 @@ class QuizScreen : AppCompatActivity() {
             }
 
             btnNext.visibility = Button.VISIBLE
+            btnError.isEnabled = false
+            btnValid.isEnabled = false
         }
 
         btnNext.setOnClickListener {
@@ -77,13 +81,18 @@ class QuizScreen : AppCompatActivity() {
                     btnNext.visibility = Button.INVISIBLE
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra("SCORE", score/2)
+                    intent.putExtra("ANSWERS", Answers.toBooleanArray())
+                    intent.putExtra("Questions", QuestionArray)
                     startActivity(intent)
-                }, 3000)
+                }, 1500)
             }
             else{
                 counter++
                 tvCodeSnippet.text = QuestionArray[counter]
                 tvFeedback.text = ""
+                btnNext.visibility = Button.INVISIBLE
+                btnError.isEnabled = true
+                btnValid.isEnabled = true
             }
         }
     }
